@@ -1,6 +1,6 @@
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import CharacterTextSplitter
-loader = TextLoader("90-文档-Data/山西文旅/云冈石窟.txt")
+loader = TextLoader("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/山西文旅/云冈石窟.txt")
 documents = loader.load()
 # 设置分块器，指定块的大小为50个字符，无重叠
 text_splitter = CharacterTextSplitter(

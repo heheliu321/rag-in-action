@@ -1,6 +1,6 @@
 # 连接到SQLite数据库
 import sqlite3
-conn = sqlite3.connect('90-文档-Data/tourism.db')
+conn = sqlite3.connect('/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/tourism.db')
 cursor = conn.cursor()
 # 创建景区信息表
 cursor.execute('''

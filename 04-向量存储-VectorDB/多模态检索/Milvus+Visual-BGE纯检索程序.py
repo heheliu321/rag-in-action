@@ -143,7 +143,7 @@ if __name__ == "__main__":
     searcher = MilvusSearcher("./wukong_images.db", "wukong_scenes")
     
     # 生成查询向量
-    query_image = "90-文档-Data/多模态/query_image.jpg"
+    query_image = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/多模态/query_image.jpg"
     query_text = "寻找类似的雪地战斗场景"
     qvec = encoder.encode_query(query_image, query_text)
     

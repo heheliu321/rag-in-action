@@ -73,7 +73,7 @@ class WukongDataset:
                 self.images.append(WukongImage(**img_data))
 
 # 初始化数据集
-dataset = WukongDataset("90-文档-Data/多模态", "90-文档-Data/多模态/metadata.json")
+dataset = WukongDataset("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/多模态", "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/多模态/metadata.json")
 
 # ==================== 3. 生成图像嵌入 ====================
 # 为所有图像生成嵌入向量
@@ -228,7 +228,7 @@ def visualize_results(query_image: str, results: List[dict], output_path: str):
 
 # ==================== 7. 执行查询示例 ====================
 # 执行查询
-query_image = "90-文档-Data/多模态/query_image.jpg"
+query_image = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/多模态/query_image.jpg"
 query_text = "寻找悟空面对建筑物战斗场景"
 
 results = search_similar_images(

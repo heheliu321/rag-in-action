@@ -1,7 +1,7 @@
 # 1. 加载并预处理数据集
 import json
 from typing import Optional, Dict
-with open("90-文档-Data/灭神纪/战斗场景.json", 'r', encoding='utf-8') as f:
+with open("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/灭神纪/战斗场景.json", 'r', encoding='utf-8') as f:
     dataset = json.load(f)
 
 docs = []

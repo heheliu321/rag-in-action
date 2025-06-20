@@ -6,7 +6,7 @@ from llama_index.core.node_parser import (
 from llama_index.embeddings.openai import OpenAIEmbedding 
 # from llama_index.embeddings.huggingface import HuggingFaceEmbedding 
 # embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh")
-documents = SimpleDirectoryReader(input_files=["90-文档-Data/黑悟空/黑悟空wiki.txt"]).load_data()
+documents = SimpleDirectoryReader(input_files=["/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑悟空wiki.txt"]).load_data()
 
 # 创建语义分块器
 splitter = SemanticSplitterNodeParser(

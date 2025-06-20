@@ -28,7 +28,7 @@ desc_index = faiss.IndexFlatL2(dimension)
 desc_index.add(desc_embeddings.astype('float32'))
 
 # 4. 加载Excel文件并准备第二层数据
-excel_file = "90-文档-Data/复杂PDF/十大富豪/世界十大富豪.xlsx"
+excel_file = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/复杂PDF/十大富豪/世界十大富豪.xlsx"
 all_tables_data = {}
 
 # 读取Excel文件中的所有sheet

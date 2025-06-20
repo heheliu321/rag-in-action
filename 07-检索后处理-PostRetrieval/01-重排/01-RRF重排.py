@@ -28,7 +28,7 @@ RRF是一种简单而有效的多检索结果融合算法，它通过将多个�
 """
 
 # 文档目录配置
-doc_dir = "90-文档-Data/山西文旅"
+doc_dir = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/山西文旅"
 
 def load_documents(directory):
     """

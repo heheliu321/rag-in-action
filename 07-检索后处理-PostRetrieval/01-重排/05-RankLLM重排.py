@@ -43,7 +43,7 @@ print("🔄 初始化RankLLM重排系统...")
 
 # 1. 文档加载和预处理
 print("📖 加载和预处理文档...")
-doc_path = "90-文档-Data/山西文旅/云冈石窟.txt"
+doc_path = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/山西文旅/云冈石窟.txt"
 print(f"文档路径: {doc_path}")
 
 print("  🔤 使用TextLoader加载文档...")

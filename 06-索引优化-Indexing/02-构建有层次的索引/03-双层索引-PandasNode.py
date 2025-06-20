@@ -25,7 +25,7 @@ Settings.llm = OpenAI(model="gpt-3.5-turbo")
 Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
 
 # 3. 加载Excel文件并准备数据
-excel_file = "90-文档-Data/复杂PDF/十大富豪/世界十大富豪.xlsx"
+excel_file = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/复杂PDF/十大富豪/世界十大富豪.xlsx"
 
 # 初始化Node Parser
 node_parser = SentenceSplitter(

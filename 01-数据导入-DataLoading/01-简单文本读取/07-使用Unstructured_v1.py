@@ -1,5 +1,10 @@
 from unstructured.partition.text import partition_text
-text = "90-文档-Data/黑悟空/设定.txt"
+
+import nltk
+nltk.download('averaged_perceptron_tagger_eng')
+
+
+text = "/Users/niumingjie.nmj/github/rag-in-action//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/设定.txt"
 elements = partition_text(text)
 for element in elements:
     print(element)
