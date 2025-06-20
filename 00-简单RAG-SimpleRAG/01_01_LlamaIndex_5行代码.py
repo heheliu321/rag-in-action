@@ -23,7 +23,7 @@ print(torch.backends.mps.is_available())  # 应返回 True
 # 第一行代码：导入相关的库
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader 
 # 第二行代码：加载数据
-documents = SimpleDirectoryReader(input_files=["/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/设定.txt"]).load_data()
+documents = SimpleDirectoryReader(input_files=["C:\github\liuhehe-rag\\rag-in-action\90-文档-Data\黑悟空\设定.txt"]).load_data()
 
 # 设置 DashScope LLM（例如 qwen-max）
 Settings.llm = DashScope(

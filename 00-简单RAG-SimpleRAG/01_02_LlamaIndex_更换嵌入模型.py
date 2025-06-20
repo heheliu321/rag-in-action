@@ -10,7 +10,7 @@ embed_model = HuggingFaceEmbedding(
     )
 
 # 加载数据
-documents = SimpleDirectoryReader(input_files=["/Users/niumingjie.nmj/github/rag-in-action//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/设定.txt"]).load_data()
+documents = SimpleDirectoryReader(input_files=["C:\github\liuhehe-rag\rag-in-action\90-文档-Data\黑悟空\设定.txt"]).load_data()
 
 # 构建索引
 index = VectorStoreIndex.from_documents(

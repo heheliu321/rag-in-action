@@ -31,14 +31,16 @@ load_dotenv()
 # 加载本地嵌入模型
 embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh")
 
+print(os.getenv("OLLAMA_MODEL"))
+
 # 创建 Ollama LLM, 默认URL：http://localhost:11434
 llm = Ollama(
-    model=os.getenv("OLLAMA_MODEL"),
+    model="llama2:7b",
     request_timeout=300.0
 )
 
 # 第二行代码：加载数据
-documents = SimpleDirectoryReader(input_files=["/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/设定.txt"]).load_data() 
+documents = SimpleDirectoryReader(input_files=[r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\黑悟空\设定.txt"]).load_data()
 
 # 第三行代码：构建索引
 index = VectorStoreIndex.from_documents(
