@@ -6,10 +6,10 @@ import json
 from sklearn.metrics.pairwise import cosine_similarity
 
 # 读取用户评价数据集
-df = pd.read_csv("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/灭神纪/用户评价.csv")
+df = pd.read_csv(r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\灭神纪\用户评价.csv")
 
 # 读取游戏描述文件
-with open("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/灭神纪/游戏说明.json", "r") as f:
+with open(r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\灭神纪\游戏说明.json", "r") as f:
     game_descriptions = json.load(f)
 
 # 定义函数获取嵌入向量

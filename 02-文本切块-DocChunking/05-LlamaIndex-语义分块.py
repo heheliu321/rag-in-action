@@ -1,18 +1,27 @@
+from langchain_community.embeddings import DashScopeEmbeddings
 from llama_index.core import SimpleDirectoryReader
 from llama_index.core.node_parser import (
     SentenceSplitter,
     SemanticSplitterNodeParser,
 )
+from llama_index.embeddings.dashscope import DashScopeEmbedding
 from llama_index.embeddings.openai import OpenAIEmbedding 
 # from llama_index.embeddings.huggingface import HuggingFaceEmbedding 
 # embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh")
-documents = SimpleDirectoryReader(input_files=["/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑悟空wiki.txt"]).load_data()
+documents = SimpleDirectoryReader(input_files=[r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\黑悟空\黑悟空wiki.txt"]).load_data()
+
+embed_model = DashScopeEmbedding(
+    model_name="text-embedding-v2",  # 可根据 DashScope 支持的模型名调整
+    api_key="sk-71efd8a95f9d43b6a03f35abd074fee6",
+    api_base="https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+)
 
 # 创建语义分块器
 splitter = SemanticSplitterNodeParser(
     buffer_size=3,  # 缓冲区大小
     breakpoint_percentile_threshold=90, # 断点百分位阈值
-    embed_model=OpenAIEmbedding()     # 使用的嵌入模型
+    # embed_model=OpenAIEmbedding()     # 使用的嵌入模型
+    embed_model=embed_model     # 使用的嵌入模型
 )
 # 创建基础句子分块器（作为对照）
 base_splitter = SentenceSplitter(

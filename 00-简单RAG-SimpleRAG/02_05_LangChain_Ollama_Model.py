@@ -24,9 +24,27 @@ from dotenv import load_dotenv
 # 加载环境变量
 load_dotenv()
 
+
+# 设置代理（如果需要）
+# os.environ["HTTP_PROXY"] = "http://127.0.0.1:17890"
+# os.environ["HTTPS_PROXY"] = "http://127.0.0.1:17890"
+#
+# os.environ["HTTP_PROXY"] = "socks5://127.0.0.1:17890"
+# os.environ["HTTPS_PROXY"] = "socks5://127.0.0.1:17890"
+
+
+# 设置 User-Agent
+os.environ["USER_AGENT"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+
+# os.environ["HTTP_PROXY"] = "socks5://127.0.0.1:17890"
+# os.environ["HTTPS_PROXY"] = "socks5://127.0.0.1:17890"
+
+
+
 from langchain_community.document_loaders import WebBaseLoader
 loader = WebBaseLoader(
-    web_paths=("https://zh.wikipedia.org/wiki/黑神话：悟空",)
+    web_paths=("https://baike.baidu.com/item/%E9%BB%91%E7%A5%9E%E8%AF%9D%EF%BC%9A%E6%82%9F%E7%A9%BA/53303078",),
+    # verify_ssl=False  # 添加此参数
 )
 docs = loader.load()
 
@@ -68,6 +86,6 @@ prompt = ChatPromptTemplate.from_template("""
 
 # 8. 使用大语言模型生成答案
 from langchain_ollama import ChatOllama # pip install langchain-ollama
-llm = ChatOllama(model=os.getenv("OLLAMA_MODEL"))
+llm = ChatOllama(model="llama2:7b")
 answer = llm.invoke(prompt.format(question=question, context=docs_content))
 print(answer.content)

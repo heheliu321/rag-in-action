@@ -2,7 +2,7 @@
 from langchain_community.document_loaders import WebBaseLoader, TextLoader
 from langchain_community.embeddings import DashScopeEmbeddings
 
-loader = TextLoader("/Users/niumingjie.nmj/github/rag-in-action//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑悟空wiki.txt", encoding='utf-8')
+loader = TextLoader(r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\黑悟空\黑悟空wiki.txt", encoding='utf-8')
 docs = loader.load()
 
 # 2. 文档分块

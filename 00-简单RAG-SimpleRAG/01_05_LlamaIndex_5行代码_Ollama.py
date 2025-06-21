@@ -18,6 +18,7 @@
      OLLAMA_MODEL=qwen:7b  # 或其他已下载的模型名称
 """
 
+
 # 第一行代码：导入相关的库
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
@@ -34,6 +35,7 @@ embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh")
 print(os.getenv("OLLAMA_MODEL"))
 
 # 创建 Ollama LLM, 默认URL：http://localhost:11434
+#ollama pull llama2:7b 提前下载好
 llm = Ollama(
     model="llama2:7b",
     request_timeout=300.0

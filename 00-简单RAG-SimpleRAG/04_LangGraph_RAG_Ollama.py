@@ -1,13 +1,20 @@
 # 1. 加载文档
 import os
 from dotenv import load_dotenv
+from langchain_community.chat_models import ChatTongyi
+from langchain_community.embeddings import DashScopeEmbeddings
+
 # 加载环境变量
 load_dotenv()
 
-from langchain_community.document_loaders import WebBaseLoader
-loader = WebBaseLoader(
-    web_paths=("https://zh.wikipedia.org/wiki/黑神话：悟空",)
-)
+os.environ["OLLAMA_MODEL"] = "llama2:7b"
+
+from langchain_community.document_loaders import WebBaseLoader, TextLoader
+
+# loader = WebBaseLoader(
+#     web_paths=("https://baike.baidu.com/item/黑神话悟空/53303078",)
+# )
+loader = TextLoader(r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\黑悟空\黑悟空wiki.txt", encoding='utf-8')
 docs = loader.load()
 
 # 2. 文档分块
@@ -17,10 +24,16 @@ all_splits = text_splitter.split_documents(docs)
 
 # 3. 设置嵌入模型
 from langchain_huggingface import HuggingFaceEmbeddings
-embeddings = HuggingFaceEmbeddings(
-    model_name="BAAI/bge-small-zh-v1.5",
-    model_kwargs={'device': 'cpu'},
-    encode_kwargs={'normalize_embeddings': True}
+# embeddings = HuggingFaceEmbeddings(
+#     model_name="BAAI/bge-small-zh-v1.5",
+#     model_kwargs={'device': 'cpu'},
+#     encode_kwargs={'normalize_embeddings': True}
+# )
+
+# 3. 设置嵌入模型
+embeddings = DashScopeEmbeddings(
+    model="text-embedding-v2",  # 可根据 DashScope 支持的模型名调整
+    dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
 )
 
 # 4. 创建向量存储aa
@@ -50,6 +63,11 @@ def retrieve(state: State):
 def generate(state: State):
     from langchain_ollama import ChatOllama
     llm = ChatOllama(model=os.getenv("OLLAMA_MODEL"))
+
+    # llm = ChatTongyi(
+    #     model_name="qwen-max",
+    #     dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
+    # )
     docs_content = "\n\n".join(doc.page_content for doc in state["context"])
     messages = prompt.invoke({"question": state["question"], "context": docs_content})
     response = llm.invoke(messages)

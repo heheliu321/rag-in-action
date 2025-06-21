@@ -18,7 +18,7 @@ from langchain_community.document_loaders import WebBaseLoader, TextLoader  # pi
 #     header_template=headers  # 添加 User-Agent
 # )
 # 假设你已将网页保存为本地文件
-loader = TextLoader("/Users/niumingjie.nmj/github/rag-in-action//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑悟空wiki.txt", encoding='utf-8')
+loader = TextLoader(r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\黑悟空/黑悟空wiki.txt", encoding='utf-8')
 docs = loader.load()
 
 # 2. 文档分块
@@ -82,7 +82,7 @@ from langchain_community.chat_models.tongyi import ChatTongyi
 from langchain_core.messages import HumanMessage
 
 llm = ChatTongyi(
-    model_name="qwen-max",
+    model_name="deepseek-r1",
     dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
 )
 
@@ -96,6 +96,7 @@ prompt = """基于以下上下文，回答问题。如果上下文中没有相�
 prompt = (prompt.replace("{context}", docs_content).
           replace("{question}", "黑悟空有哪些游戏场景？"))
 message = HumanMessage(content=prompt)
+print("开始执行大模型输出=======>")
 answer = llm.invoke([message])
 
 print(answer)
