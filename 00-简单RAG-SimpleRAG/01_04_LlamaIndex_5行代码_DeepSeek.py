@@ -1,4 +1,6 @@
 # 第一行代码：导入相关的库
+from pathlib import Path
+
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
 from llama_index.embeddings.dashscope import DashScopeEmbedding
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
@@ -26,8 +28,8 @@ Settings.embed_model = DashScopeEmbedding(
 )
 
 # 第二行代码：加载数据
-documents = SimpleDirectoryReader(input_files=[r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\黑悟空\设定.txt"]).load_data()
-
+current_dir = Path(__file__).resolve().parent.parent
+documents = SimpleDirectoryReader(input_files=[f"{current_dir}\90-文档-Data\黑悟空\设定.txt"]).load_data()
 # 第三行代码：构建索引
 index = VectorStoreIndex.from_documents(
     documents,

@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
 from llama_index.llms.openai import OpenAI  # 导入 OpenAI LLM 类
 from llama_index.embeddings.openai import OpenAIEmbedding # 导入 OpenAI Embedding 类
@@ -40,7 +42,8 @@ Settings.embed_model = OpenAIEmbedding(
 # 第二行代码：加载数据
 # 确保文件路径 "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/设定.txt" 是正确的，并且程序有权限读取
 try:
-    documents = SimpleDirectoryReader(input_files=["/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/设定.txt"]).load_data()
+    current_dir = Path(__file__).resolve().parent.parent
+    documents = SimpleDirectoryReader(input_files=[f"{current_dir}\90-文档-Data\黑悟空\设定.txt"]).load_data()
 except Exception as e:
     print(f"加载文档时出错: {e}")
     print("请检查文件路径和权限。")

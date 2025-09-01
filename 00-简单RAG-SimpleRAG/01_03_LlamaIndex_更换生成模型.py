@@ -1,4 +1,6 @@
 # 导入相关的库
+from pathlib import Path
+
 from llama_index.llms.deepseek import DeepSeek  # 需要pip install llama-index-llms-deepseek
 from llama_index.core import Settings, VectorStoreIndex, SimpleDirectoryReader
 from llama_index.embeddings.dashscope import DashScopeEmbedding
@@ -28,8 +30,8 @@ Settings.embed_model = DashScopeEmbedding(
 )
 
 # 加载数据
-documents = SimpleDirectoryReader(input_files=["C:\github\liuhehe-rag\\rag-in-action\90-文档-Data\黑悟空\设定.txt"]).load_data()
-
+current_dir = Path(__file__).resolve().parent.parent
+documents = SimpleDirectoryReader(input_files=[f"{current_dir}\90-文档-Data\黑悟空\设定.txt"]).load_data()
 # 构建索引
 index = VectorStoreIndex.from_documents(documents)
 

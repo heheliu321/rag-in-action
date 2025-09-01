@@ -8,6 +8,8 @@ set OPENAI_API_KEY=your-api-key
 
 如果无法取得OpenAI API密钥，也没关系，我们有平替方案，请移步至其它程序。
 """
+from pathlib import Path
+
 from llama_index.llms.deepseek import DeepSeek  # 需要pip install llama-index-llms-deepseek
 from llama_index.core import Settings, VectorStoreIndex, SimpleDirectoryReader
 from llama_index.embeddings.dashscope import DashScopeEmbedding
@@ -23,7 +25,11 @@ print(torch.backends.mps.is_available())  # 应返回 True
 # 第一行代码：导入相关的库
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader 
 # 第二行代码：加载数据
-documents = SimpleDirectoryReader(input_files=["C:\github\liuhehe-rag\\rag-in-action\90-文档-Data\黑悟空\设定.txt"]).load_data()
+
+
+# 获取当前脚本所在目录
+current_dir = Path(__file__).resolve().parent.parent
+documents = SimpleDirectoryReader(input_files=[f"{current_dir}\90-文档-Data\黑悟空\设定.txt"]).load_data()
 
 # 设置 DashScope LLM（例如 qwen-max）
 Settings.llm = DashScope(
