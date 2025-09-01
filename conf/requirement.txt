@@ -1,0 +1,7 @@
+circus
+Flask[async]
+scikit-learn
+jieba
+pandas
+aiohttp>=3.12.11
+asyncio>=3.4.3
