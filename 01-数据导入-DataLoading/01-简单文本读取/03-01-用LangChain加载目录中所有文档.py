@@ -38,6 +38,7 @@ import nltk
 nltk.download('averaged_perceptron_tagger') 
 nltk.download('punkt') 
 """
+from pathlib import Path
 
 import nltk
 nltk.download('punkt')
@@ -50,7 +51,8 @@ from langchain_community.document_loaders import DirectoryLoader
 script_dir = os.path.dirname(__file__)
 print(f"获取当前脚本文件所在的目录：{script_dir}") 
 # 结合相对路径构建完整路径
-data_dir = os.path.join(script_dir, '../..//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空')
+current_dir = Path(__file__).resolve().parent.parent.parent
+data_dir = os.path.join(script_dir, f'{current_dir}/90-文档-Data/黑悟空')
 
 loader = DirectoryLoader(data_dir)
 docs = loader.load()

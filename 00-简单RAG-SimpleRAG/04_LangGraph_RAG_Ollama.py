@@ -1,5 +1,7 @@
 # 1. 加载文档
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 from langchain_community.chat_models import ChatTongyi
 from langchain_community.embeddings import DashScopeEmbeddings
@@ -14,7 +16,9 @@ from langchain_community.document_loaders import WebBaseLoader, TextLoader
 # loader = WebBaseLoader(
 #     web_paths=("https://baike.baidu.com/item/黑神话悟空/53303078",)
 # )
-loader = TextLoader(r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\黑悟空\黑悟空wiki.txt", encoding='utf-8')
+
+current_dir = Path(__file__).resolve().parent.parent
+loader = TextLoader(f"{current_dir}\90-文档-Data\黑悟空\黑悟空wiki.txt", encoding='utf-8')
 docs = loader.load()
 
 # 2. 文档分块
@@ -62,12 +66,12 @@ def retrieve(state: State):
 # 8. 定义生成步骤
 def generate(state: State):
     from langchain_ollama import ChatOllama
-    llm = ChatOllama(model=os.getenv("OLLAMA_MODEL"))
+    llm = ChatOllama(model="llama2:7b")
 
-    # llm = ChatTongyi(
-    #     model_name="qwen-max",
-    #     dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
-    # )
+    llm = ChatTongyi(
+        model_name="qwen-max",
+        dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
+    )
     docs_content = "\n\n".join(doc.page_content for doc in state["context"])
     messages = prompt.invoke({"question": state["question"], "context": docs_content})
     response = llm.invoke(messages)

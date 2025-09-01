@@ -55,7 +55,7 @@ prompt = f"""根据以下参考信息回答问题，并给出信息源编号。
 from ollama import chat
 
 response = chat(
-    model=os.getenv("OLLAMA_MODEL"),  
+    model='llama2:7b',
     messages=[{
         "role": "user",
         "content": prompt

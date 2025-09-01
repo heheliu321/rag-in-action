@@ -51,17 +51,11 @@ prompt = ChatPromptTemplate.from_template("""
                                           )
 
 # 8. 使用大语言模型生成答案
-from langchain_openai import ChatOpenAI
+from langchain_community.chat_models.tongyi import ChatTongyi
 
-llm = ChatOpenAI(
-    model="deepseek-reasoner",  # DeepSeek API 支持的模型名称
-    base_url="https://api.deepseek.com/v1",
-    temperature=0.7,        # 控制输出的随机性(0-1之间,越大越随机)
-    max_tokens=2048,        # 最大输出长度
-    top_p=0.95,            # 控制输出的多样性(0-1之间)
-    presence_penalty=0.0,   # 重复惩罚系数(-2.0到2.0之间)
-    frequency_penalty=0.0,  # 频率惩罚系数(-2.0到2.0之间)
-    api_key=os.getenv("DEEPSEEK_API_KEY")  # 从环境变量加载API key
+llm = ChatTongyi(
+    model_name="deepseek-r1",
+    dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
 )
 answer = llm.invoke(prompt.format(question=question, context=docs_content))
 print(answer)

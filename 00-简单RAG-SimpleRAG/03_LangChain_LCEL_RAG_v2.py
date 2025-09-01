@@ -13,9 +13,12 @@ text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20
 all_splits = text_splitter.split_documents(docs)
 
 # 3. 设置嵌入模型
-from langchain_openai import OpenAIEmbeddings
+from langchain_community.embeddings import DashScopeEmbeddings
 
-embeddings = OpenAIEmbeddings()
+embeddings = DashScopeEmbeddings(
+    model="text-embedding-v2",  # 可根据 DashScope 支持的模型名调整
+    dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
+)
 
 # 4. 创建向量存储
 from langchain_core.vectorstores import InMemoryVectorStore
@@ -46,7 +49,13 @@ import os
 from dotenv import load_dotenv
 # 加载环境变量
 load_dotenv()
-llm = ChatDeepSeek(model="deepseek-chat", api_key=os.getenv("DEEPSEEK_API_KEY"))
+from langchain_community.chat_models.tongyi import ChatTongyi
+
+llm = ChatTongyi(
+    model_name="deepseek-r1",
+    dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
+)
+
 
 # 8. 构建 LCEL 链
 # 管道式数据流像使用 Unix 命令管道 (|) 一样，将不同的处理逻辑串联在一起

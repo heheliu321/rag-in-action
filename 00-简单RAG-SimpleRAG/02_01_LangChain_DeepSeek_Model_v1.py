@@ -1,5 +1,7 @@
 # 1. 加载文档
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 from langchain_community.embeddings import DashScopeEmbeddings
 
@@ -18,7 +20,8 @@ from langchain_community.document_loaders import WebBaseLoader, TextLoader  # pi
 #     header_template=headers  # 添加 User-Agent
 # )
 # 假设你已将网页保存为本地文件
-loader = TextLoader(r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\黑悟空/黑悟空wiki.txt", encoding='utf-8')
+current_dir = Path(__file__).resolve().parent.parent
+loader = TextLoader(f"{current_dir}\90-文档-Data\黑悟空/黑悟空wiki.txt", encoding='utf-8')
 docs = loader.load()
 
 # 2. 文档分块

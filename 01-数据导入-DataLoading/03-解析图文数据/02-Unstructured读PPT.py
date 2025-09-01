@@ -9,9 +9,12 @@ sudo apt-get update && sudo apt-get install -y libreoffice
 - Mac: https://formulae.brew.sh/cask/libreoffice
 - Debian: https://wiki.debian.org/LibreOffice
 """
+from pathlib import Path
+
 from unstructured.partition.ppt import partition_ppt
 # 解析 PPT 文件
-ppt_elements = partition_ppt(filename="/Users/niumingjie.nmj/github/rag-in-action//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑神话悟空.pptx")
+current_dir = Path(__file__).resolve().parent.parent.parent
+ppt_elements = partition_ppt(filename=f"{current_dir}/90-文档-Data/黑悟空/黑神话悟空.pptx")
 print("PPT 内容：")
 # for element in ppt_elements:
 #     print(element.text)

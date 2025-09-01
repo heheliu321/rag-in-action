@@ -1,17 +1,19 @@
+from pathlib import Path
+
 from pdf2image import convert_from_path
 import base64
 import os
 from openai import OpenAI
 
 # 初始化 OpenAI 客户端
-client = OpenAI()
+# client = OpenAI()
 output_dir = "temp_images"
 
 # 1. PDF 转图片
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
-
-images = convert_from_path("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑神话悟空.pdf")
+current_dir = Path(__file__).resolve().parent.parent.parent
+images = convert_from_path(f"{current_dir}/90-文档-Data/黑悟空/黑神话悟空.pdf")
 image_paths = []
 for i, image in enumerate(images):
     image_path = os.path.join(output_dir, f'page_{i+1}.jpg')

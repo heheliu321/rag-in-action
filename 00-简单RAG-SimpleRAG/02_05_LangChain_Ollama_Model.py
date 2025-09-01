@@ -43,7 +43,7 @@ os.environ["USER_AGENT"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKi
 
 from langchain_community.document_loaders import WebBaseLoader
 loader = WebBaseLoader(
-    web_paths=("https://baike.baidu.com/item/%E9%BB%91%E7%A5%9E%E8%AF%9D%EF%BC%9A%E6%82%9F%E7%A9%BA/53303078",),
+    web_paths=("https://zh.wikipedia.org/wiki/黑神话：悟空",),
     # verify_ssl=False  # 添加此参数
 )
 docs = loader.load()

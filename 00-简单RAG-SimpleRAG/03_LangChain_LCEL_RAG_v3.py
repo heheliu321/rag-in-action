@@ -50,7 +50,13 @@ from langchain_ollama import ChatOllama
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
-llm = ChatOllama(model=os.getenv("OLLAMA_MODEL"))
+from langchain_community.chat_models.tongyi import ChatTongyi
+
+llm = ChatTongyi(
+    model_name="deepseek-r1",
+    dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
+)
+
 
 # 8. 构建 LCEL 链
 # 管道式数据流像使用 Unix 命令管道 (|) 一样，将不同的处理逻辑串联在一起

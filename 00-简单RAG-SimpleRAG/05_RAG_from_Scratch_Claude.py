@@ -10,10 +10,12 @@ from chromadb.utils import embedding_functions
 load_dotenv()
 
 # 初始化 DashScope 嵌入模型
-embeddings = DashScopeEmbeddings(
-    model="text-embedding-v2",  # 根据实际支持的模型名调整
-    dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"  # 使用环境变量获取 API Key
-)
+# embeddings = DashScopeEmbeddings(
+#     model="text-embedding-v2",  # 根据实际支持的模型名调整
+#     dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"  # 使用环境变量获取 API Key
+# )
+
+embedding_function = embedding_functions.DefaultEmbeddingFunction()
 
 # 初始化 ChromaDB 客户端并指定嵌入函数
 client = PersistentClient(path="./chroma_db")  # 持久化路径
@@ -21,7 +23,7 @@ client = PersistentClient(path="./chroma_db")  # 持久化路径
 # 创建或获取集合时，直接使用 DashScopeEmbeddings 提供的向量
 collection = client.get_or_create_collection(
     name="docs",
-    embedding_function=embeddings  # 直接使用 DashScopeEmbeddings 作为嵌入函数
+    embedding_function=embedding_function  # 直接使用 DashScopeEmbeddings 作为嵌入函数
 )
 
 # 准备文档数据

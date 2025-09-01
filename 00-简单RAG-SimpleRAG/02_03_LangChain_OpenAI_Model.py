@@ -9,10 +9,13 @@ docs = loader.load()
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 all_splits = text_splitter.split_documents(docs)
+from langchain_community.embeddings import DashScopeEmbeddings
 
 # 3. 设置嵌入模型
-from langchain_openai import OpenAIEmbeddings # pip install langchain-openai
-embeddings = OpenAIEmbeddings()
+embeddings = DashScopeEmbeddings(
+    model="text-embedding-v2",  # 可根据 DashScope 支持的模型名调整
+    dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
+)
 
 # 4. 创建向量存储
 from langchain_core.vectorstores import InMemoryVectorStore
@@ -37,8 +40,11 @@ prompt = ChatPromptTemplate.from_template("""
                                           )
 
 # 8. 使用大语言模型生成答案
-from langchain_openai import ChatOpenAI
-llm = ChatOpenAI(model="gpt-3.5-turbo")
+from langchain_community.chat_models.tongyi import ChatTongyi
+llm = ChatTongyi(
+    model_name="deepseek-r1",
+    dashscope_api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
+)
 answer = llm.invoke(prompt.format(question=question, context=docs_content))
 print(answer.content)
 

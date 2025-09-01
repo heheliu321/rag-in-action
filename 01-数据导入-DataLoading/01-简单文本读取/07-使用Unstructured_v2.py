@@ -1,5 +1,8 @@
+from pathlib import Path
+
 from unstructured.partition.text import partition_text
-text = "/Users/niumingjie.nmj/github/rag-in-action//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/设定.txt"
+current_dir = Path(__file__).resolve().parent.parent.parent
+text = f"{current_dir}/90-文档-Data/黑悟空/设定.txt"
 elements = partition_text(text)
 for element in elements:
     print(element)

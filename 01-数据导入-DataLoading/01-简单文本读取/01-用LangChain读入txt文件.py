@@ -1,12 +1,15 @@
 # 读取单个txt文件
 import os
+from pathlib import Path
+
 from langchain_community.document_loaders import TextLoader
 # 获取当前脚本文件所在的目录
 script_dir = os.path.dirname(__file__)
 print(f"获取当前脚本文件所在的目录：{script_dir}") 
 # 结合相对路径构建完整路径
-file_dir = os.path.join(script_dir, '../..//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/设定.txt')
+current_dir = Path(__file__).resolve().parent.parent.parent
+file_dir = os.path.join(script_dir, f'{current_dir}/90-文档-Data/黑悟空/设定.txt')
 
-loader = TextLoader(file_dir)
+loader = TextLoader(file_dir,encoding='utf-8')
 documents = loader.load()
 print(documents)
