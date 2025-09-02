@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 import numpy as np
 import requests
@@ -9,9 +11,9 @@ headers = {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer jina_4a0adace937d43299b955eb9146386a54B2Ubzak2NcPXcTekETSbKeDLtep'
 }
-
+current_dir = Path(__file__).resolve().parent.parent
 # 2. 读取游戏描述数据
-df = pd.read_csv("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/灭神纪/游戏描述.csv")
+df = pd.read_csv(f"{current_dir}/90-文档-Data/灭神纪/游戏描述.csv")
 texts = df['description'].tolist()
 
 # 3. 获取文本嵌入

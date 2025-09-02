@@ -1,4 +1,7 @@
 import os
+from pathlib import Path
+import os
+from openai import OpenAI
 import openai
 import pandas as pd
 import numpy as np
@@ -6,19 +9,33 @@ import json
 from sklearn.metrics.pairwise import cosine_similarity
 
 # 读取用户评价数据集
-df = pd.read_csv(r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\灭神纪\用户评价.csv")
+current_dir = Path(__file__).resolve().parent.parent
+
+df = pd.read_csv(f"{current_dir}\90-文档-Data\灭神纪\用户评价.csv")
 
 # 读取游戏描述文件
-with open(r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\灭神纪\游戏说明.json", "r") as f:
+with open(f"{current_dir}\90-文档-Data\灭神纪\游戏说明.json", "r") as f:
     game_descriptions = json.load(f)
 
 # 定义函数获取嵌入向量
 def get_embedding(text, model="text-embedding-3-small"):
-    response = openai.embeddings.create(
-        input=[text],
-        model=model
+    client = OpenAI(
+        api_key="sk-71efd8a95f9d43b6a03f35abd074fee6",  # 如果您没有配置环境变量，请在此处用您的API Key进行替换
+        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1"  # 百炼服务的base_url
     )
-    return response.data[0].embedding
+
+    completion = client.embeddings.create(
+        model="text-embedding-v4",
+        input=text,
+        dimensions=1024,  # 指定向量维度（仅 text-embedding-v3及 text-embedding-v4支持该参数）
+        encoding_format="float"
+    )
+
+    # response = openai.embeddings.create(
+    #     input=[text],
+    #     model=model
+    # )
+    return completion.data[0].embedding
 
 # 获取所有游戏的嵌入向量
 unique_games = df['game_title'].unique().tolist()

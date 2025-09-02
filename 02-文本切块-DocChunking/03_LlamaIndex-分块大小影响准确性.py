@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from langchain_community.chat_models import ChatTongyi
 from langchain_community.embeddings import DashScopeEmbeddings
 from llama_index.llms.openai import OpenAI
@@ -28,8 +30,9 @@ Settings.node_parser = SentenceSplitter(chunk_size=250, chunk_overlap=20) # 50, 
 
 # Load PDF using standard PDFReader
 loader = PDFReader()
+current_dir = Path(__file__).resolve().parent.parent
 documents = loader.load_data(
-    file=r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\复杂PDF\uber_10q_march_2022_page26.pdf"
+    file=f"{current_dir}\90-文档-Data\复杂PDF\\uber_10q_march_2022_page26.pdf"
 )
 
 # Create index directly from documents

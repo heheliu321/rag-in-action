@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from langchain_community.embeddings import DashScopeEmbeddings
 from llama_index.core import SimpleDirectoryReader
 from llama_index.core.node_parser import (
@@ -8,7 +10,8 @@ from llama_index.embeddings.dashscope import DashScopeEmbedding
 from llama_index.embeddings.openai import OpenAIEmbedding 
 # from llama_index.embeddings.huggingface import HuggingFaceEmbedding 
 # embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh")
-documents = SimpleDirectoryReader(input_files=[r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\黑悟空\黑悟空wiki.txt"]).load_data()
+current_dir = Path(__file__).resolve().parent.parent
+documents = SimpleDirectoryReader(input_files=[f"{current_dir}\90-文档-Data\黑悟空\黑悟空wiki.txt"]).load_data()
 
 embed_model = DashScopeEmbedding(
     model_name="text-embedding-v2",  # 可根据 DashScope 支持的模型名调整

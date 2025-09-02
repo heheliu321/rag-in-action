@@ -3,7 +3,10 @@
 安装visual_bge，参考：
 https://github.com/FlagOpen/FlagEmbedding/tree/master/research/visual_bge#readme
 """
-
+from pathlib import Path
+import sys
+# 一定要注意这地方路径
+sys.path.append(r"D:\github\FlagEmbedding\research\visual_bge")
 import torch
 from visual_bge.modeling import Visualized_BGE
 from PIL import Image
@@ -11,12 +14,13 @@ import numpy as np
 
 # 初始化编码器
 model_name = "BAAI/bge-base-en-v1.5"
-model_path = "./Visualized_base_en_v1.5.pth"
+model_path = "D:\github\\bge-visualized/Visualized_base_en_v1.5.pth"
 model = Visualized_BGE(model_name_bge=model_name, model_weight=model_path)
 model.eval()
 
 # 定义图片路径
-image_path = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/多模态/query_image.jpg"
+current_dir = Path(__file__).resolve().parent.parent
+image_path =f"{current_dir}/90-文档-Data/多模态/query_image.jpg"
 
 # 对图片进行编码
 with torch.no_grad():

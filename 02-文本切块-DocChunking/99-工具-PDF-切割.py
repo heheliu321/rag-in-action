@@ -33,8 +33,9 @@ def extract_pages(pdf_path, output_path, page_numbers):
         raise
             
 if __name__ == "__main__":
-    pdf_path = r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\复杂PDF\uber_10q_march_2022.pdf"
-    output_path = r"C:\github\liuhehe-rag\rag-in-action\90-文档-Data\复杂PDF\uber_10q_march_2022_page1-3.pdf"
+    current_dir = Path(__file__).resolve().parent.parent
+    pdf_path = f"{current_dir}\90-文档-Data\复杂PDF\\uber_10q_march_2022.pdf"
+    output_path =f"{current_dir}\90-文档-Data\复杂PDF\\uber_10q_march_2022_page1-3.pdf"
     page_numbers = [26, 27, 28]  # 指定要提取的页码
     extract_pages(pdf_path, output_path, page_numbers)
         
