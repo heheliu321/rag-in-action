@@ -9,12 +9,22 @@ sudo apt-get update && sudo apt-get install -y libreoffice
 - Mac: https://formulae.brew.sh/cask/libreoffice
 - Debian: https://wiki.debian.org/LibreOffice
 """
+import os
 from pathlib import Path
+# 设置环境变量
+os.environ['PYTHONIOENCODING'] = 'utf-8'
 
 from unstructured.partition.ppt import partition_ppt
-# 解析 PPT 文件
+from unstructured.partition.ppt import partition_ppt
+# 指定soffice的完整路径
+# soffice_path = "C:\Program Files\LibreOffice\program/soffice.exe"  # 根据实际安装路径修改
+
+# 解析 PPT 文件，指定soffice路径
 current_dir = Path(__file__).resolve().parent.parent.parent
-ppt_elements = partition_ppt(filename=f"{current_dir}/90-文档-Data/黑悟空/黑神话悟空.pptx")
+ppt_elements = partition_ppt(
+    filename=f"{current_dir}/90-文档-Data/黑悟空/黑神话悟空.pptx",
+    # libreoffice_path=soffice_path  # 如果这个参数不工作，可以尝试下面的方法
+)
 print("PPT 内容：")
 # for element in ppt_elements:
 #     print(element.text)

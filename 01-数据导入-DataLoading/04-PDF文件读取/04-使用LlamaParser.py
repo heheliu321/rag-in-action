@@ -1,11 +1,15 @@
 # 需要LLAMA_CLOUD_API_KEY
+from pathlib import Path
+
 from dotenv import load_dotenv
 load_dotenv()   
 
 # LlamaParse PDF reader for PDF Parsing
 from llama_parse import LlamaParse
+current_dir = Path(__file__).resolve().parent.parent.parent
+file_path = f"{current_dir}/90-文档-Data/黑悟空/黑神话悟空.pdf"
 documents = LlamaParse(result_type="markdown").load_data(
-    "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑神话悟空.pdf"
+   file_path
 )
 print(documents)
 

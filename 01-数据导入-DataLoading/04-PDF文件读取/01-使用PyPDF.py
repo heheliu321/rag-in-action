@@ -1,5 +1,8 @@
+from pathlib import Path
+
 from langchain_community.document_loaders import PyPDFLoader
-file_path = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑神话悟空.pdf"
+current_dir = Path(__file__).resolve().parent.parent.parent
+file_path = f"{current_dir}/90-文档-Data/黑悟空/黑神话悟空.pdf"
 loader = PyPDFLoader(file_path)
 pages = loader.load()
 print(f"加载了 {len(pages)} 页PDF文档")

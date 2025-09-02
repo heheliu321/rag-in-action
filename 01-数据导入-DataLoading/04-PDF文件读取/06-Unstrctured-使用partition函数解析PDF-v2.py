@@ -1,9 +1,11 @@
 # 导入unstructured的partition函数用于PDF解析
+from pathlib import Path
+
 from unstructured.partition.auto import partition
 
 # 设置PDF文件路径
-filename = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑神话悟空.pdf"
-
+current_dir = Path(__file__).resolve().parent.parent.parent
+filename = f"{current_dir}/90-文档-Data/黑悟空/黑神话悟空.pdf"
 # 使用partition函数解析PDF文件
 # content_type指定文件类型为PDF
 elements = partition(filename=filename, 

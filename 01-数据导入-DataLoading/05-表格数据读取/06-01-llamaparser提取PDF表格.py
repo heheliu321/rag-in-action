@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
@@ -16,7 +18,9 @@ Settings.llm = llm
 Settings.embed_model = embed_model
 
 # 定义PDF路径
-pdf_path = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/复杂PDF/billionaires_page-1-5.pdf"
+current_dir = Path(__file__).resolve().parent.parent.parent
+
+pdf_path = f"{current_dir}/90-文档-Data/复杂PDF/billionaires_page-1-5.pdf"
 
 # 记录开始时间
 start_time = time.time()

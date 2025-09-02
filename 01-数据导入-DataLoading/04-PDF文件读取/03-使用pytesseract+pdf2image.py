@@ -1,6 +1,7 @@
 # 扫描图片型 PDF，建议用 pytesseract + pdf2image  
 # sudo apt-get install tesseract-ocr
 # sudo apt-get install tesseract-ocr-chi-sim
+from pathlib import Path
 
 import pdf2image
 import pytesseract
@@ -11,7 +12,9 @@ output_dir = 'output'
 os.makedirs(output_dir, exist_ok=True)
 
 # 将 PDF 转换为图片并保存
-images = pdf2image.convert_from_path('/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑神话悟空.pdf')
+current_dir = Path(__file__).resolve().parent.parent.parent
+file_path = f"{current_dir}/90-文档-Data/黑悟空/黑神话悟空.pdf"
+images = pdf2image.convert_from_path(file_path)
 for i, image in enumerate(images):
     image.save(f'{output_dir}/page_{i+1}.png')
 

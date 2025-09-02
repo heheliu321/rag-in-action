@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from unstructured.partition.pdf import partition_pdf
 from llama_index.core import Settings
 from llama_index.llms.openai import OpenAI
@@ -8,7 +10,9 @@ Settings.llm = OpenAI(model="gpt-3.5-turbo")
 Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
 
 # 解析 PDF 结构，提取文本和表格
-file_path = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/复杂PDF/billionaires_page-1-5.pdf"  # 修改为你的文件路径
+current_dir = Path(__file__).resolve().parent.parent.parent
+
+file_path = f"{current_dir}/90-文档-Data/复杂PDF/billionaires_page-1-5.pdf"
 
 elements = partition_pdf(
     file_path,

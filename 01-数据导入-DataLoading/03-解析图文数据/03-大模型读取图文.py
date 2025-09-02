@@ -6,7 +6,10 @@ import os
 from openai import OpenAI
 
 # 初始化 OpenAI 客户端
-# client = OpenAI()
+client = OpenAI(
+    api_key='sk-71efd8a95f9d43b6a03f35abd074fee6',
+    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+)
 output_dir = "temp_images"
 
 # 1. PDF 转图片
@@ -28,24 +31,28 @@ results = []
 for image_path in image_paths:
     with open(image_path, "rb") as image_file:
         base64_image = base64.b64encode(image_file.read()).decode('utf-8')
-    
+
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="qwen-vl-max-latest",
+        # 此处以qwen-vl-max-latest为例，可按需更换模型名称。模型列表：https://help.aliyun.com/zh/model-studio/models
         messages=[
+            {
+                "role": "system",
+                "content": [{"type": "text", "text": "You are a helpful assistant."}],
+            },
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": "请详细描述这张PPT幻灯片的内容，包括标题、正文和图片内容。"},
                     {
                         "type": "image_url",
                         "image_url": {
-                            "url": f"data:image/jpeg;base64,{base64_image}"
-                        }
-                    }
-                ]
-            }
+                            "url": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20241022/emyrja/dog_and_girl.jpeg"
+                        },
+                    },
+                    {"type": "text", "text": "图中描绘的是什么景象?"},
+                ],
+            },
         ],
-        max_tokens=300
     )
 results.append(response.choices[0].message.content)
 

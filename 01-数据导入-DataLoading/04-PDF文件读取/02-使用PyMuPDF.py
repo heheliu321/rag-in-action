@@ -1,6 +1,10 @@
+from pathlib import Path
+
 import pymupdf
 # 打开PDF文件
-doc = pymupdf.open("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑神话悟空.pdf")
+current_dir = Path(__file__).resolve().parent.parent.parent
+file_path = f"{current_dir}/90-文档-Data/黑悟空/黑神话悟空.pdf"
+doc = pymupdf.open(file_path)
 text = [page.get_text() for page in doc]
 print(text)
 

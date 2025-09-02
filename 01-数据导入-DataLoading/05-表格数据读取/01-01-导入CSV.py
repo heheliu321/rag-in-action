@@ -1,6 +1,9 @@
+from pathlib import Path
+
 from langchain_community.document_loaders import CSVLoader
 # # 第 1 部分: 基本加载 CSV 文件并打印记录
-file_path = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/黑神话悟空.csv"
+current_dir = Path(__file__).resolve().parent.parent.parent
+file_path = f"{current_dir}/90-文档-Data/黑悟空/黑神话悟空.csv"
 # loader = CSVLoader(file_path=file_path)
 # data = loader.load()
 # print("示例 1: 基本加载 CSV 文件并打印前两条记录")

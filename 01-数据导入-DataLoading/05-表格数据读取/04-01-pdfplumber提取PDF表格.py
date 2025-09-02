@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pdfplumber
 import pandas as pd
 import time
@@ -6,7 +8,11 @@ import time
 start_time = time.time()
 
 # 打开PDF文件
-pdf = pdfplumber.open("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/复杂PDF/billionaires_page-1-5.pdf")
+current_dir = Path(__file__).resolve().parent.parent.parent
+
+pdf_path = f"{current_dir}/90-文档-Data/复杂PDF/billionaires_page-1-5.pdf"
+
+pdf = pdfplumber.open(pdf_path)
 
 # 遍历每一页
 for page in pdf.pages:

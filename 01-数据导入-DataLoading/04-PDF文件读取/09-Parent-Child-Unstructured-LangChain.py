@@ -1,4 +1,7 @@
-file_path = '/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/山西文旅/云冈石窟-en.pdf'
+from pathlib import Path
+
+current_dir = Path(__file__).resolve().parent.parent.parent
+file_path = f"{current_dir}/90-文档-Data/山西文旅/云冈石窟-en.pdf"
 from langchain_unstructured import UnstructuredLoader
 loader = UnstructuredLoader(
     file_path=file_path,
