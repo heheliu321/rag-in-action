@@ -7,7 +7,7 @@ load_dotenv()
 # Neo4j连接配置
 uri = "bolt://localhost:7687"  # 默认Neo4j Bolt端口
 username = "neo4j"
-password = os.getenv("NEO4J_PASSWORD")  # 从环境变量获取密码
+password = '1qaz@WSX' # 从环境变量获取密码
 
 # 初始化Neo4j驱动
 driver = GraphDatabase.driver(uri, auth=(username, password))
@@ -43,11 +43,13 @@ schema_description = """
 3. HAS_RELATIONSHIP: 概念之间的其他关系
 """
 
+
+
 # 初始化DeepSeek客户端
 from openai import OpenAI
 client = OpenAI(
-    base_url="https://api.deepseek.com",
-    api_key=os.getenv("DEEPSEEK_API_KEY")
+    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+    api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
 )
 
 # 设置查询
@@ -68,7 +70,7 @@ prompt = f"""
 
 # 调用LLM生成Cypher语句
 response = client.chat.completions.create(
-    model="deepseek-chat",
+    model="qwen-max",
     messages=[
         {"role": "system", "content": "你是一个Cypher查询专家。请只返回Cypher查询语句，不要包含任何Markdown格式或其他说明。"},
         {"role": "user", "content": prompt}

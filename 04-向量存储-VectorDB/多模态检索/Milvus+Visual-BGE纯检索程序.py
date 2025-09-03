@@ -1,6 +1,8 @@
 """
 纯检索程序：基于已构建的Milvus向量库进行检索
 """
+import sys
+from pathlib import Path
 
 import torch
 from pymilvus import MilvusClient
@@ -8,6 +10,7 @@ from PIL import Image
 import cv2
 import numpy as np
 from typing import List, Optional, Dict
+sys.path.append(r"D:\github\FlagEmbedding\research\visual_bge")
 from visual_bge.modeling import Visualized_BGE
 
 class WukongEncoder:
@@ -31,7 +34,7 @@ class WukongEncoder:
 class MilvusSearcher:
     """Milvus检索器"""
     def __init__(self, db_path: str, collection_name: str):
-        self.client = MilvusClient(uri=db_path)
+        self.client = MilvusClient(uri=db_path,token="root:Milvus")
         self.collection_name = collection_name
     
     def search(
@@ -136,14 +139,15 @@ def print_results(results: List[dict]):
 if __name__ == "__main__":
     # 初始化编码器（根据需要换中文模型）
     model_name = "BAAI/bge-base-en-v1.5"
-    model_path = "./Visualized_base_en_v1.5.pth"
+    model_path = "D:\github\\bge-visualized/Visualized_base_en_v1.5.pth"
     encoder = WukongEncoder(model_name, model_path)
     
     # 初始化检索器
-    searcher = MilvusSearcher("./wukong_images.db", "wukong_scenes")
+    searcher = MilvusSearcher("http://118.31.46.104:19530", "wukong_scenes_2")
     
     # 生成查询向量
-    query_image = "/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/多模态/query_image.jpg"
+    current_dir = Path(__file__).resolve().parent.parent.parent
+    query_image = f"{current_dir}/90-文档-Data/多模态/query_image.jpg"
     query_text = "寻找类似的雪地战斗场景"
     qvec = encoder.encode_query(query_image, query_text)
     

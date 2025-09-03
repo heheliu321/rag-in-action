@@ -1,7 +1,9 @@
 # 1. 加载并预处理数据集
 import json
+from pathlib import Path
 from typing import Optional, Dict
-with open("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/灭神纪/战斗场景.json", 'r', encoding='utf-8') as f:
+current_dir = Path(__file__).resolve().parent.parent.parent
+with open(f"{current_dir}/90-文档-Data/灭神纪/战斗场景.json", 'r', encoding='utf-8') as f:
     dataset = json.load(f)
 
 docs = []
@@ -45,7 +47,8 @@ from pymilvus import (
 )
 
 collection_name = "wukong_hybrid"
-connections.connect(uri="./wukong.db")
+MILVUS_URI = "http://118.31.46.104:19530" # 使用新的数据库文件
+connections.connect(uri=MILVUS_URI)
 
 # 4. 创建 Milvus 集合和索引
 fields = [

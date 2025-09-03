@@ -1,5 +1,7 @@
 import json
 import time
+from pathlib import Path
+
 from milvus_model.hybrid import BGEM3EmbeddingFunction
 from pymilvus import (
     connections,
@@ -14,10 +16,12 @@ from pymilvus import (
 from pymilvus.exceptions import MilvusException
 import scipy.sparse # 确保已安装 scipy
 
+
 # 0. 配置 (方便修改)
-DATA_PATH = "/root/AI-BOX/code/rag/rag-in-action//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/灭神纪/战斗场景.json"
+current_dir = Path(__file__).resolve().parent.parent.parent
+DATA_PATH = f"{current_dir}/90-文档-Data/灭神纪/战斗场景.json"
 COLLECTION_NAME = "wukong_hybrid_v4" # 使用新的集合名以避免旧数据冲突
-MILVUS_URI = "./wukong_v4.db" # 使用新的数据库文件
+MILVUS_URI = "http://118.31.46.104:19530" # 使用新的数据库文件
 BATCH_SIZE = 50 # 可以尝试减小批次大小，例如 10 或 20，进行测试
 DEVICE = "cpu" # 或者 "cuda" 如果有GPU并已正确配置
 

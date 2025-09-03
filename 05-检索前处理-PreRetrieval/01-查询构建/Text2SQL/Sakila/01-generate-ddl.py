@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 # 1. 加载 .env 中的数据库配置
 load_dotenv()  
 
-host = os.getenv("MYSQL_HOST")
+host ="localhost"
 port = int(os.getenv("MYSQL_PORT", "3306"))
 user = "root"
 password = "password"
@@ -40,6 +40,6 @@ finally:
     conn.close()
 
 # 5. 写入 YAML 文件
-with open("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/sakila/ddl_statements.yaml", "w") as f:
-    yaml.safe_dump(ddl_map, f, sort_keys=True, allow_unicode=True)
-print("✅ ddl_statements.yaml 已生成，共包含表：", list(ddl_map.keys()))
+# with open("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/sakila/ddl_statements.yaml", "w") as f:
+#     yaml.safe_dump(ddl_map, f, sort_keys=True, allow_unicode=True)
+# print("✅ ddl_statements.yaml 已生成，共包含表：", list(ddl_map.keys()))

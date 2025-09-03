@@ -2,9 +2,12 @@
 多模态图像检索系统：基于Visualized-BGE和Milvus实现
 功能：对图像和文本进行多模态编码，并在图像数据库中检索相似内容
 """
+import sys
+from pathlib import Path
 
 # ==================== 1. 初始化编码器 ====================
 import torch
+sys.path.append(r"D:\github\FlagEmbedding\research\visual_bge")
 from visual_bge.modeling import Visualized_BGE
 from dataclasses import dataclass
 from typing import List, Optional
@@ -35,7 +38,7 @@ class WukongEncoder:
 
 # 初始化编码器
 model_name = "BAAI/bge-base-en-v1.5"
-model_path = "./Visualized_base_en_v1.5.pth"
+model_path = "D:\github\\bge-visualized/Visualized_base_en_v1.5.pth"
 encoder = WukongEncoder(model_name, model_path)
 
 # ==================== 2. 数据集管理 ====================
@@ -73,7 +76,8 @@ class WukongDataset:
                 self.images.append(WukongImage(**img_data))
 
 # 初始化数据集
-dataset = WukongDataset("/home/huangj2/Documents/rag-in-action//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/多模态", "/home/huangj2/Documents/rag-in-action//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/多模态/metadata.json")
+current_dir = Path(__file__).resolve().parent.parent.parent
+dataset = WukongDataset(f"{current_dir}/90-文档-Data/多模态", f"{current_dir}/90-文档-Data/多模态/metadata.json")
 
 # ==================== 3. 生成图像嵌入 ====================
 # 为所有图像生成嵌入向量
@@ -89,8 +93,10 @@ print(f"成功编码 {len(image_dict)} 张图片")
 
 # ==================== 4. Milvus向量库设置 ====================
 # 连接/创建Milvus数据库
-collection_name = "wukong_scenes"
-milvus_client = MilvusClient(uri="./wukong_images.db")
+collection_name = "wukong_scenes_2"
+milvus_client = MilvusClient(
+    uri="http://118.31.46.104:19530",
+    token="root:Milvus")
 
 # 创建向量集合
 dim = len(list(image_dict.values())[0])
@@ -228,7 +234,7 @@ def visualize_results(query_image: str, results: List[dict], output_path: str):
 
 # ==================== 7. 执行查询示例 ====================
 # 执行查询
-query_image = "/home/huangj2/Documents/rag-in-action//Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/多模态/query_image.jpg"
+query_image = f"{current_dir}/90-文档-Data/多模态/query_image.jpg"
 query_text = "寻找悟空面对建筑物战斗场景"
 
 results = search_similar_images(
