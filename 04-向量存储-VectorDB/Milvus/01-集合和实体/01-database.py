@@ -18,10 +18,10 @@ from pymilvus import MilvusClient, exceptions
 # ——————————————
 # 1. 连接 Milvus Standalone
 # ——————————————
-# uri: 协议+地址+端口，默认为 http://localhost:19530
+# uri: 协议+地址+端口，默认为 http://118.31.46.104:19530
 # token: "用户名:密码"，默认 root:Milvus
 client = MilvusClient(
-    uri="http://localhost:19530",
+    uri="http://118.31.46.104:19530",
     token="root:Milvus"
 )
 

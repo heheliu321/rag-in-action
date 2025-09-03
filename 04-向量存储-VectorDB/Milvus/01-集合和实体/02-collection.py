@@ -5,7 +5,7 @@ from pymilvus import MilvusClient
 # 0. 连接 Milvus
 # ——————————————
 client = MilvusClient(
-    uri="http://localhost:19530",
+    uri="http://118.31.46.104:19530",
     token="root:Milvus"
 )
 print("✓ 已连接 Milvus接口")
@@ -37,6 +37,7 @@ print("当前所有集合：", cols)
 # ——————————————
 info = client.describe_collection(collection_name=collection_name)
 print(f"{collection_name} 详情：", info)
+
 
 # ——————————————
 # 4. 重命名 Collection
@@ -152,8 +153,10 @@ client.drop_alias(alias="alias3")
 print("✓ 已删除 alias3")
 print("剩余 aliases：", client.list_aliases(new_collection_name))
 
-# ——————————————
-# 11. 删除 Collection
-# ——————————————
+# 删除与集合关联的别名
+client.drop_alias(alias="alias4")
+print("✓ 已删除 alias4")
+
+# 然后再删除集合
 client.drop_collection(collection_name=new_collection_name)
 print(f"✓ 集合 {new_collection_name} 已删除")

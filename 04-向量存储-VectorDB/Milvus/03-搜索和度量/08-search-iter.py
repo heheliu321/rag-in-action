@@ -2,7 +2,7 @@ from pymilvus import MilvusClient, DataType
 import random
 
 # 1. 设置 Milvus 客户端
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://118.31.46.104:19530")
 COLLECTION_NAME = "search_iterator_demo"
 
 # 如果集合已存在，则删除

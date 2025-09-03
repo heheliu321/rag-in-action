@@ -5,7 +5,7 @@ from pymilvus import MilvusClient, DataType
 # 0. 连接 Milvus
 # ——————————————
 client = MilvusClient(
-    uri="http://localhost:19530",
+    uri="http://118.31.46.104:19530",
     token="root:Milvus"
 )
 print("✓ 已连接 Milvus接口")

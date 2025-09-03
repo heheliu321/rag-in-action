@@ -9,7 +9,7 @@ COSINE 适合方向相似性比较
 '''
 
 # 1. 设置 Milvus 客户端
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://118.31.46.104:19530")
 
 # 定义指标类型和对应的集合名称
 metric_types = ["L2", "IP", "COSINE"]

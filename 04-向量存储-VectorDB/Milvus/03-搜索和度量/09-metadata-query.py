@@ -2,7 +2,7 @@ from pymilvus import MilvusClient, DataType
 import random
 
 # 1. 设置 Milvus 客户端
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://118.31.46.104:19530")
 COLLECTION_NAME = "ann_search_demo"
 
 # 如果集合已存在，则删除
@@ -125,7 +125,7 @@ print("\n=== QueryIterator 分页查询 ===")
 from pymilvus import connections, Collection
 
 # 重新连接以使用 Collection 类
-connections.connect(uri="http://localhost:19530")
+connections.connect(uri="http://118.31.46.104:19530")
 collection = Collection(COLLECTION_NAME)
 
 iterator = collection.query_iterator(

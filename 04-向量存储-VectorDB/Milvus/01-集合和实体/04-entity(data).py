@@ -3,7 +3,7 @@ import random
 
 # 连接到 Milvus
 client = MilvusClient(
-    uri="http://localhost:19530",
+    uri="http://118.31.46.104:19530",
     token="root:Milvus"
 )
 
