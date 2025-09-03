@@ -1,4 +1,6 @@
 import logging
+from pathlib import Path
+
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import TextLoader
 from langchain_deepseek import ChatDeepSeek
@@ -9,7 +11,8 @@ from langchain.retrievers.multi_query import MultiQueryRetriever # 多角度查�
 logging.basicConfig()
 logging.getLogger("langchain.retrievers.multi_query").setLevel(logging.INFO)
 # 加载游戏相关文档并构建向量数据库
-loader = TextLoader("/Users/niumingjie.nmj/github/rag-in-action/90-文档-Data/黑悟空/设定.txt", encoding='utf-8')
+current_dir = Path(__file__).resolve().parent.parent.parent
+loader = TextLoader(f"{current_dir}/90-文档-Data/黑悟空/设定.txt", encoding='utf-8')
 data = loader.load()
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=0)
 splits = text_splitter.split_documents(data)

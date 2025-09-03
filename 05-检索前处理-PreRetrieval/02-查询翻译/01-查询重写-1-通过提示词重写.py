@@ -2,8 +2,8 @@ from openai import OpenAI
 from os import getenv
 # 初始化OpenAI客户端，指定DeepSeek URL
 client = OpenAI(
-    base_url="https://api.deepseek.com",
-    api_key=getenv("DEEPSEEK_API_KEY")
+    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+    api_key="sk-71efd8a95f9d43b6a03f35abd074fee6"
 )
 def rewrite_query(question: str) -> str:
     """使用大模型重写查询"""
@@ -18,7 +18,7 @@ def rewrite_query(question: str) -> str:
 请直接给出重写后的查询（不要加任何前缀或说明）。"""
     # 使用DeepSeek模型重写查询   
     response = client.chat.completions.create(
-        model="deepseek-chat",
+        model="qwen-max",
         messages=[
             {"role": "user", "content": prompt.format(question=question)}
         ],
